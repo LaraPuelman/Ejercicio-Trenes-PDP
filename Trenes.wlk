@@ -1,0 +1,184 @@
+// Formaciones
+
+class Formacion {
+
+    var locomotoras
+
+    var vagones
+
+    // 1. Añadir un vagón a una formación.
+
+    method añadirVagon(vagon) {
+
+      vagones.add(vagon)
+
+    }
+
+    // 2. Agregar una locomotora a una formación.
+
+    method añadirLocomotora(locomotora) {
+
+      locomotoras.add(locomotora)
+
+    }
+
+    //3. Saber la cantidad de vagones que tiene una formación.
+
+    method cantidadDeVagones() {
+
+      return vagones.size()
+
+    }
+
+    //4. Conocer el total de pasajeros que puede transportar una formación.
+
+    method totalDePasajeros(){
+
+        pasajeros = vagones.map(vagon.cantidadDePasajeros)
+
+        return pasajeros.sum()
+
+    }
+
+    // 5. Determinar cuántos vagones livianos tiene una formación. Un vagón es liviano si su peso máximo es menor a 2500 kg.
+
+    method vagonesLivianos() {
+
+      vagones.count(self.esLiviano()) // es liviano
+
+      return 0
+
+    }
+
+    // 6. Calcular la velocidad máxima de una formación, que es el mínimo entre las velocidades máximas de las locomotoras
+
+    method velocidadMaxima() {
+
+      return locomotoras.min(self.velocidadMaxima())
+
+    }
+
+    //7. Responder si una formación es eficiente. Es eficiente si cada una de sus locomotoras arrastra, al menos, cinco veces su peso.
+
+    method esEficiente() {
+
+      return 0
+
+    }
+
+    //8. Contestar si una formación puede moverse. Esto ocurre si el arrastre útil total de las locomotoras es mayor o igual al peso máximo total de los vagones.
+
+    method puedeMoverse(){
+
+        return (locomotoras.map(arrastreUtil()) >= vagones.map(pesoMaximo()))
+
+    }
+
+    //9. Denotar cuántos kilos de empuje le faltan a una formación para poder moverse, que es la diferencia entre el peso máximo total de los vagones y el arrastre útil total de las locomotoras.
+
+    method cuantosKilosLeFaltanParaMoverse(){
+
+        return 0
+
+    }
+
+    //
+
+}
+
+
+
+class Locomotora {
+
+  const peso
+
+  const velocidadMaxima
+
+  const pesoQuePuedeArrastrar
+
+
+
+  method velocidadMaxima(){
+
+    return velocidadMaxima
+
+  }
+
+}
+
+
+
+class Vagon {
+
+    const tipo
+
+    method pesoMaximo(){
+
+        return tipo.pesoMaximo(self)
+
+    }
+
+    method esLiviano(){
+
+        return (self.pesoMaximo()<2500)
+
+    }
+
+    method cantidadDePasajeros(){
+
+      return tipo.cantidadDePasajeros()
+
+    }
+
+}
+
+
+
+object dePasajeros {
+
+  method cantidadDePasajeros(vagon){
+
+    if (vagon.anchoUtil()>2,5){
+
+      return vagon.largo()*10
+
+    } else {
+
+      return vagon.largo()*8
+
+    }
+
+  }
+
+  method pesoMaximo(vagon){
+
+    return self.cantidadDePasajeros(vagon)*80
+
+  }
+
+}
+
+
+
+object deCarga {
+
+  method cantidadDePasajeros(vagon){
+
+    return 2
+
+  }
+
+  method pesoMaximo(vagon){
+
+    return self.cargaMaxima()+160
+
+  }
+
+  method cargaMaxima(vagon){
+
+    return  vagon.cargaMaxima()
+
+  }
+
+}
+
